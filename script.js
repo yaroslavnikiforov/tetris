@@ -93,7 +93,7 @@ function move() {
 
   for (let i = 0; i < coordinates.length; i++) {
     if (
-      coordinates[i][1] === 1 ||
+      coordinates[i][1] == 1 ||
       document
         .querySelector(
           `[posX = "${coordinates[i][0]}"][posY = "${coordinates[i][1] - 1}"]`
