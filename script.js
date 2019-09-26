@@ -27,35 +27,121 @@ const x = 5,
 
 const mainArr = [
   // stick
-  [[0, 1], [0, 2], [0, 3]],
+  [
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    // 90 degree rotation
+    [[-1, 1], [0, 0], [1, -1], [2, -2]],
+    // 180 degree rotation
+    [[1, -1], [0, 0], [-1, 1], [-2, 2]],
+    // 270 degree rotation
+    [[-1, 1], [0, 0], [1, -1], [2, -2]],
+    // 360 degree rotation
+    [[1, -1], [0, 0], [-1, 1], [-2, 2]]
+  ],
 
   // square
-  [[1, 0], [0, 1], [1, 1]],
+  [
+    [1, 0],
+    [0, 1],
+    [1, 1],
+    // 90 degree rotation
+    [[0, 0], [0, 0], [0, 0], [0, 0]],
+    // 180 degree rotation
+    [[0, 0], [0, 0], [0, 0], [0, 0]],
+    // 270 degree rotation
+    [[0, 0], [0, 0], [0, 0], [0, 0]],
+    // 360 degree rotation
+    [[0, 0], [0, 0], [0, 0], [0, 0]]
+  ],
 
   // L - letter
-  [[1, 0], [0, 1], [0, 2]],
+  [
+    [1, 0],
+    [0, 1],
+    [0, 2],
+    // 90 degree rotation
+    [[0, 0], [-1, 1], [1, 0], [2, -1]],
+    // 180 degree rotation
+    [[1, -1], [1, -1], [-1, 0], [-1, 0]],
+    // 270 degree rotation
+    [[-1, 0], [0, -1], [2, -2], [1, -1]],
+    // 360 degree rotation
+    [[0, -1], [0, -1], [-2, 0], [-2, 0]]
+  ],
 
   // mirror L - letter
-  [[1, 0], [1, 1], [1, 2]],
+  [
+    [1, 0],
+    [1, 1],
+    [1, 2],
+    // 90 degree rotation
+    [[0, 0], [0, 0], [1, -1], [-1, -1]],
+    // 180 degree rotation
+    [[0, -1], [-1, 0], [-2, 1], [1, 0]],
+    // 270 degree rotation
+    [[2, 0], [0, 0], [1, -1], [1, -1]],
+    // 360 degree rotation
+    [[-2, 0], [1, -1], [0, 0], [-1, 1]]
+  ],
 
   // left flash
-  [[1, 0], [-1, 1], [0, 1]],
+  [
+    [1, 0],
+    [-1, 1],
+    [0, 1],
+    // 90 degree rotation
+    [[0, -1], [-1, 0], [2, -1], [1, 0]],
+    // 180 degree rotation
+    [[0, 0], [1, -1], [-2, 0], [-1, -1]],
+    // 270 degree rotation
+    [[0, -1], [-1, 0], [2, -1], [1, 0]],
+    // 360 degree rotation
+    [[0, 0], [1, -1], [-2, 0], [-1, -1]]
+  ],
 
   // right flash
-  [[1, 0], [1, 1], [2, 1]],
+  [
+    [1, 0],
+    [1, 1],
+    [2, 1],
+    // 90 degree rotation
+    [[2, -1], [0, 0], [1, -1], [-1, 0]],
+    // 180 degree rotation
+    [[-2, 0], [0, -1], [-1, 0], [1, -1]],
+    // 270 degree rotation
+    [[2, -1], [0, 0], [1, -1], [-1, 0]],
+    // 360 degree rotation
+    [[-2, 0], [0, -1], [-1, 0], [1, -1]]
+  ],
 
   // lego
-  [[1, 0], [2, 0], [1, 1]]
+  [
+    [1, 0],
+    [2, 0],
+    [1, 1],
+    // 90 degree rotation
+    [[1, -1], [0, 0], [0, 0], [0, 0]],
+    // 180 degree rotation
+    [[0, 0], [-1, 0], [-1, 0], [1, -1]],
+    // 270 degree rotation
+    [[1, -1], [1, -1], [1, -1], [0, 0]],
+    // 360 degree rotation
+    [[-2, 0], [0, -1], [0, -1], [-1, -1]]
+  ]
 ];
 
 let currentFigure = 0;
 let figureBody = 0;
+let rotate = 1;
 
 function create() {
   function getRandom() {
     return Math.round(Math.random() * (mainArr.length - 1));
   }
 
+  rotate = 1;
   currentFigure = getRandom();
 
   figureBody = [
@@ -207,5 +293,64 @@ window.addEventListener("keydown", event => {
 
   if (event.key === "ArrowDown") {
     move();
+  }
+
+  if (event.key === "ArrowUp") {
+    flag = true;
+
+    let figureNew = [
+      document.querySelector(
+        `[posX = "${+coordinates1[0] +
+          mainArr[currentFigure][
+            rotate + 2
+          ][0][0]}"][posY = "${+coordinates1[1] +
+          mainArr[currentFigure][rotate + 2][0][1]}"]`
+      ),
+      document.querySelector(
+        `[posX = "${+coordinates2[0] +
+          mainArr[currentFigure][
+            rotate + 2
+          ][1][0]}"][posY = "${+coordinates2[1] +
+          mainArr[currentFigure][rotate + 2][1][1]}"]`
+      ),
+      document.querySelector(
+        `[posX = "${+coordinates3[0] +
+          mainArr[currentFigure][
+            rotate + 2
+          ][2][0]}"][posY = "${+coordinates3[1] +
+          mainArr[currentFigure][rotate + 2][2][1]}"]`
+      ),
+      document.querySelector(
+        `[posX = "${+coordinates4[0] +
+          mainArr[currentFigure][
+            rotate + 2
+          ][3][0]}"][posY = "${+coordinates4[1] +
+          mainArr[currentFigure][rotate + 2][3][1]}"]`
+      )
+    ];
+
+    for (let i = 0; i < figureNew.length; i++) {
+      if (!figureNew[i] || figureNew[i].classList.contains("set")) {
+        flag = false;
+      }
+    }
+
+    if (flag) {
+      for (let i = 0; i < figureBody.length; i++) {
+        figureBody[i].classList.remove("figure");
+      }
+
+      figureBody = figureNew;
+
+      for (let i = 0; i < figureBody.length; i++) {
+        figureBody[i].classList.add("figure");
+      }
+
+      if (rotate < 4) {
+        rotate++;
+      } else {
+        rotate = 1;
+      }
+    }
   }
 });
