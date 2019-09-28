@@ -3,11 +3,20 @@
   font-family: Arial;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
 .main {
   position: relative;
-  width: 500px;
-  height: 700px;
-  margin: 50px auto;
+  width: 450px;
+  height: 630px;
   overflow: hidden;
   border: 1px solid silver;
 }
@@ -17,15 +26,15 @@
   bottom: 0;
   display: flex;
   flex-wrap: wrap;
-  width: 500px;
-  height: 900px;
+  width: 450px;
+  height: 810px;
   overflow: hidden;
   background-color: white;
 }
 
 .excel {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border: 1px solid silver;
 }
 
@@ -36,16 +45,17 @@
 
 input {
   display: block;
-  margin: 30px auto;
-  font-size: 30px;
+  margin-top: 20px;
+  font-size: 20px;
   padding: 10px;
 }
 
 .controls {
   position: absolute;
-  top: 200px;
-  right: 200px;
-  padding: 20px;
+  top: 50%;
+  right: 0px;
+  padding: 0 40px 0 0;
+  transform: translateY(-70%);
 }
 
 .modal {
